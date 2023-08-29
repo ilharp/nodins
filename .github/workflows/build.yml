@@ -1,0 +1,37 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          submodules: 'false'
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Build Packages
+        run: |
+          yarn
+          yarn build
+          yarn pak
+        shell: bash
+
+      - name: Upload Packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: nodins-${{ github.sha }}
+          path: build/dist

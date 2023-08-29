@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "ts-node -T scripts/clean.cts",
     "pak": "ts-node -T scripts/pak.cts",
-    "build": "yarn workspace @chronocat/red build && yarn workspace @chronocat/core build && concurrently -n pak,llqqnt,qqntim,iife yarn:pak \"yarn workspace @chronocat/plugin-llqqnt build\" \"yarn workspace @chronocat/plugin-qqntim build\" \"yarn workspace @chronocat/iife build\"",
+    "build": "yarn workspace nodins build",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "yarn lint --fix"
   },

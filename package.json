@@ -11,6 +11,7 @@
   "scripts": {
     "clean": "ts-node -T scripts/clean.cts",
     "pak": "ts-node -T scripts/pak.cts",
+    "dev": "yarn workspace nodins dev",
     "build": "yarn workspace nodins build",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "yarn lint --fix"

@@ -147,7 +147,8 @@ export class CDP {
     if (domain && domain[methodName]) return domain[methodName]!(params) || {}
 
     // FIXME
-    console.error('[Nodins] FIXME: %s %o', method, params)
+    if (process.env['NODINS_DEBUG'])
+      console.error('[Nodins] FIXME: %s %o', method, params)
     throw new Error(format('FIXME: %s %o', method, params))
   }
 }

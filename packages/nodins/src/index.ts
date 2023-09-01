@@ -139,7 +139,16 @@ export const nodinsVanilla = async (config?: Partial<NodinsVanillaConfig>) => {
   wss.on('connection', (ws) => {
     ws.on('error', console.error)
 
-    const cdp = new CDP((message) => ws.send(message))
+    const cdp = new CDP((message) => {
+      if (
+        process.env['NODINS_DEBUG'] &&
+        !message.includes('"result":{}') &&
+        !message.includes('"message":"FIXME:') &&
+        !message.startsWith('{"method":"Runtime.consoleAPICalled')
+      )
+        process.stderr.write(`[Nodins] SEND: ${message}\n`)
+      ws.send(message)
+    })
     parsedConfig.buildCDP(cdp)
 
     ws.on(
